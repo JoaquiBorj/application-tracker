@@ -1,47 +1,47 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
-} from 'firebase/auth';
-import { auth } from '../firebase';
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut as firebaseSignOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../firebase/config";
 
 export function useAuth() {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-        });
-        return unsubscribe;
-    }, []);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
 
-    const signup = async (email, password) => {
-        setError(null);
-        try {
-            await creatUserWithEmailAndPassword(auth, email, password);
-        } catch (error) {
-                setError(err.message);
-             }
-        };
+    return unsubscribe;
+  }, []);
 
-    const login = async (email, password) => {
-        setError(null);
+  const signup = async (email, password) => {
+    setError(null);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
-        try {
-            await signInWithEmailAndPassword (auth, email, password);
-        } catch (error) {
-            setError(err.message);
-        }
-    };
+  const login = async (email, password) => {
+    setError(null);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
-    const signOut = async () => {
-        await signOut(auth);
-    };
+  const logout = async () => {
+    await firebaseSignOut(auth);
+  };
 
-    return { user, loading, error, signup, login, signOut };
+  return { user, loading, error, signup, login, logout };
 }

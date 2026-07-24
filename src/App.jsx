@@ -1,6 +1,6 @@
 import {useAuth} from "./hooks/useAuth";
-import LoginScreen from "./components/LoginScreen";
-import TrackerDashboard from "./components/TrackerDashboard";
+import LoginScreen from "./pages/LoginScreen";
+import TrackerDashboard from "./pages/TrackerDashboard";
 
 function App() {
   const { user, loading } = useAuth();
@@ -11,5 +11,5 @@ function App() {
     return user ? <TrackerDashboard /> : <LoginScreen />;
 }
 
-  export default App;
+export default App;
 
