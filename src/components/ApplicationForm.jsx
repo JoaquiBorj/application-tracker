@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { STATUS, STATUS_LABELS, STATUS_OPTIONS } from "../utils/constants";
 
-const empyForm = {
+const emptyForm = {
     company: "",
     position: "",
     jobPostingUrl: "",
@@ -63,3 +63,5 @@ export default function ApplicationForm({ initialData, onSubmit, onCancel}) {
     </form>
   );
 }
+
+const inputStyle = { width: "100%", padding: 8, marginBottom: 12, display: "block" } ;

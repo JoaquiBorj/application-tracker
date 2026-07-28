@@ -13,7 +13,7 @@ export function useApplications() {
 
     useEffect(() => {
         if (!user) {
-            setAppliucations([]);
+            setApplications([]);
             setLoading(false);
             return;
         }
@@ -46,7 +46,7 @@ export function useApplications() {
         if (!user) return;
         try {
             await addDoc(collection(db, "applications"), {
-                ...data,
+                ...application,
                 userId: user.uid,
                 createdAt: serverTimestamp(),
                 updatedAt: serverTimestamp(),

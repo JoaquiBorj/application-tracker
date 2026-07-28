@@ -27,7 +27,7 @@ export default function TrackerDashboard() {
             </div>
             <p>Logged in as: {user?.email}</p>
 
-            <button onClick={() => setModalOpen(true)}>+ Application </button>
+            <button onClick={() => setModalOpen(true)}>+ Add Application </button>
 
             {loading ? (
                 <p>Loading...</p>
