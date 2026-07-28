@@ -1,8 +1,20 @@
 import { useAuth } from "../hooks/useAuth";
+import { useState } from "react";
+import { useApplications } from "../hooks/useApplications";
+import Modal from "../components/Modal";
+import ApplicationForm from "../components/ApplicationForm";
+
 
 export default function TrackerDashboard() {
 
     const {user, logout} = useAuth();
+    const {applications, addApplication, loading} = useApplications();
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const handleAdd = async (data) => {
+        await addApplication(data);
+        setModalOpen(false);
+    };
 
     return (
         <div style={{ maxWidth: 600, margin: "40px auto", padding: 24}}>
@@ -13,12 +25,22 @@ export default function TrackerDashboard() {
                     Logout
                 </button>
             </div>
+            <p>Logged in as: {user?.email}</p>
 
-                <p>Logged in as: {user?.email}</p>
-                <p style={{ marginTop: 24, color: "#888"}}>
-                    Application list and dashboard state will go here.
-                </p>
+            <button onClick={() => setModalOpen(true)}>+ Application </button>
 
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                <div style={{ marginTop: 24 }}>
+                    <p>{applications.length} application(s) so far.</p>
+                    {/* Application list goes here */}
+                </div>
+            )}
+
+            <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+                <ApplicationForm onSubmit={handleAdd} onCancel={() => setModalOpen(false)} />
+            </Modal> 
         </div>
     );
 }
