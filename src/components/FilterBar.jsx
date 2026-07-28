@@ -9,7 +9,7 @@ export default function FilterBar({ statusFilter, setStatusFilter, sortOrder, se
         }}>
             <select
              value={statusFilter}
-             onchange={(e) => setStatusFilter(e.target.value)}>
+             onChange={(e) => setStatusFilter(e.target.value)}>
                 <option value="all">
                     All statuses
                 </option>
