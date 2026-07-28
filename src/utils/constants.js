@@ -24,3 +24,5 @@ export const STATUS_COLORS = {
   [STATUS.REJECTED]: "#ef4444",    // red
   [STATUS.GHOSTED]: "#8b5cf6",     // purple
 };
+
+export const STATUS_OPTIONS = Object.values(STATUS);
