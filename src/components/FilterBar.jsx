@@ -19,6 +19,11 @@ export default function FilterBar({ statusFilter, setStatusFilter, sortOrder, se
                     </option>
                 ))}
             </select>
+
+            <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+            </select>
         </div>
     )
 } 
