@@ -21,7 +21,6 @@ export function useApplications() {
         const q = query(
             collection(db, "applications"),
             where("userId", "==", user.uid),
-            orderBy("createdAt", "desc")
         );
 
         const unsubscribe = onSnapshot(

@@ -16,7 +16,7 @@ export default function ApplicationCard({ application, onEdit, onDelete }) {
             <div>
                 <h3 style ={{ margin: "0 0 4px"}}>{application.position}</h3>
                 <p style = {{ margin:"0 0 4px", color: "#555"}}>
-                    Applied: {application.dateApplied} {application.location} && `· ${application.location}`
+                    Applied: {application.dateApplied} {application.location && `· ${application.location}`}
                 </p>
                 <StatusBadge status={application.status} />
             </div>
